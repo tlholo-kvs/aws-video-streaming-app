@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class StreamHome extends StatefulWidget {
   const StreamHome({super.key});
@@ -12,6 +13,7 @@ class StreamHome extends StatefulWidget {
 class _StreamHomeState extends State<StreamHome> {
   String? fileName;
   //USe AWS here, get videos and show the list of them here
+  String? uploadStatus;
 
   Future<void> pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
@@ -21,13 +23,19 @@ class _StreamHomeState extends State<StreamHome> {
         fileName = result.files.single.name;
       });
 
-      if (kDebugMode) {
-        print("File path: ${result.files.single.path}");
+      String? filePath = result.files.single.path;
+      if(filePath != null){
+        await uploadFileToS3(filePath);
       } else {
-        if (kDebugMode) {
-          print("User cancelled the file picker");
-        }
+        print("User cancelled file picker");
       }
+    }
+  }
+
+  Future<void> uploadFileToS3(String filePath) async {
+    try{
+      //This will be a hard coded pre-signed URL generated from AWS CLI
+      
     }
   }
 
