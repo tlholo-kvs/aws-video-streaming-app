@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mini_streamer/screens/upload.dart';
+import 'package:mini_streamer/screens/simple_version.dart';
 
 void main() {
   runApp(const MainApp());
@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body:
-          UploadScreen(),
+          StreamHome(),
         
       ),
     );
